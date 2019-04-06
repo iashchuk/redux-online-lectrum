@@ -14,7 +14,7 @@ import { mockedProfile } from "../../instruments/mockedData";
 import { Composer, Catcher, Post } from "../../components";
 
 // Actions
-import { fetchPostsAsync } from "../../bus/posts/actions";
+import { fetchPostsAsync, createPostAsync } from "../../bus/posts/actions";
 
 class Posts extends Component {
     static defaultProps = {
@@ -64,7 +64,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        actions: bindActionCreators({ fetchPostsAsync }, dispatch),
+        actions: bindActionCreators(
+            { fetchPostsAsync, createPostAsync },
+            dispatch
+        ),
     };
 };
 
