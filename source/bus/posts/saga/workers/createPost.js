@@ -4,9 +4,12 @@ import { put, apply } from "redux-saga/effects";
 // Instruments
 import { api } from "../../../../REST";
 import { postsActions } from "../../actions";
+import { uiActions } from "../../../ui/actions";
 
 export function* createPost ({ payload: comment }) {
     try {
+        yield put(uiActions.startFetching());
+
         const response = yield apply(api, api.posts.create, [comment]);
         const { data: post, message } = yield apply(response, response.json);
 
@@ -16,6 +19,8 @@ export function* createPost ({ payload: comment }) {
 
         yield put(postsActions.createPost(post));
     } catch (error) {
-        console.log("-> createPost worker", error);
+        yield put(uiActions.emitError(error.message, "→ createPost worker"));
+    } finally {
+        yield put(uiActions.stopFetching());
     }
 }
