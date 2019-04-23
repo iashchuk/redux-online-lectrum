@@ -7,12 +7,10 @@ import cx from "classnames";
 // Instruments
 import Styles from "./styles.m.css";
 import { book } from "../../navigation/book";
-import { mockedProfile } from "../../instruments/mockedData";
 
 class Nav extends Component {
     static defaultProps = {
         // State
-        profile:  mockedProfile,
         isOnline: false,
 
         // Actions
