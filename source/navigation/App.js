@@ -2,32 +2,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { Switch, Route, Redirect, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
-// Pages
-import { Login, Signup, Feed, Profile, NewPassword } from "../pages";
-
-// Instruments
-import { book } from "./book";
+// Routes
+import Public from "./Public";
+import Private from "./Private";
 
 class App extends Component {
     render () {
         const { isAuthenticated } = this.props;
 
-        return isAuthenticated ? (
-            <Switch>
-                <Route component = { Feed } path = { book.feed } />
-                <Route component = { Profile } path = { book.profile } />
-                <Route component = { NewPassword } path = { book.newPassword } />
-                <Redirect to = { book.feed } />
-            </Switch>
-        ) : (
-            <Switch>
-                <Route component = { Login } path = { book.login } />
-                <Route component = { Signup } path = { book.signUp } />
-                <Redirect to = { book.login } />
-            </Switch>
-        );
+        return isAuthenticated ? <Private /> : <Public />;
     }
 }
 
