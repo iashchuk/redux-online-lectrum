@@ -7,14 +7,12 @@ import { authActions } from "../../../auth/actions";
 import { uiActions } from "../../../ui/actions";
 import { profileActions } from "../../../profile/actions";
 
-export function* signup ({ payload: userInfo }) {
+export function* login ({ payload: credentials }) {
     try {
         yield put(uiActions.startFetching());
 
-        const response = yield apply(api, api.auth.signup, [userInfo]);
+        const response = yield apply(api, api.auth.login, [credentials]);
         const { data: profile, message } = yield apply(response, response.json);
-
-        console.log("-> profile", profile);
 
         if (response.status !== 200) {
             throw new Error(message);
@@ -23,7 +21,7 @@ export function* signup ({ payload: userInfo }) {
         yield put(profileActions.fillProfile(profile));
         yield put(authActions.authenticate());
     } catch (error) {
-        yield put(uiActions.emitError(error.message, "→ signup worker"));
+        yield put(uiActions.emitError(error.message, "→ login worker"));
     } finally {
         yield put(uiActions.stopFetching());
     }
