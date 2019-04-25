@@ -8,7 +8,14 @@ import { withRouter } from "react-router-dom";
 import Public from "./Public";
 import Private from "./Private";
 
+// Actions
+import { authActions } from "../bus/auth/actions";
+
 class App extends Component {
+    componentDidMount () {
+        this.props.authenticateAsync();
+    }
+
     render () {
         const { isAuthenticated } = this.props;
 
@@ -22,4 +29,13 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default withRouter(connect(mapStateToProps)(App));
+const mapDispatchToProps = {
+    authenticateAsync: authActions.authenticateAsync,
+};
+
+export default withRouter(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(App)
+);
