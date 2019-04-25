@@ -8,16 +8,23 @@ import { withRouter } from "react-router-dom";
 import Public from "./Public";
 import Private from "./Private";
 
+// Components
+import { Loading } from "../components";
+
 // Actions
 import { authActions } from "../bus/auth/actions";
 
 class App extends Component {
     componentDidMount () {
-        this.props.authenticateAsync();
+        this.props.initializeAsync();
     }
 
     render () {
-        const { isAuthenticated } = this.props;
+        const { isAuthenticated, isInitialized } = this.props;
+
+        if (!isInitialized) {
+            return <Loading />;
+        }
 
         return isAuthenticated ? <Private /> : <Public />;
     }
@@ -26,11 +33,12 @@ class App extends Component {
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: state.auth.get("isAuthenticated"),
+        isInitialized:   state.auth.get("isInitialized"),
     };
 };
 
 const mapDispatchToProps = {
-    authenticateAsync: authActions.authenticateAsync,
+    initializeAsync: authActions.initializeAsync,
 };
 
 export default withRouter(
