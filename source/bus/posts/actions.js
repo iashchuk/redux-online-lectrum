@@ -8,7 +8,13 @@ export const postsActions = {
             payload: posts,
         };
     },
+    clearPosts: () => {
+        return {
+            type: types.CLEAR_POSTS,
+        };
+    },
 
+    // Async
     fetchPostsAsync: () => {
         return {
             type: types.FETCH_POSTS_ASYNC,
