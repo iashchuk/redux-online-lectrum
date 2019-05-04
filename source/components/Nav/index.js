@@ -12,11 +12,6 @@ import { book } from "../../navigation/book";
 import { authActions } from "../../bus/auth/actions";
 
 class Nav extends Component {
-    static defaultProps = {
-        // State
-        isOnline: false,
-    };
-
     _getNav = () => {
         const { isAuthenticated, profile } = this.props;
 
@@ -76,6 +71,7 @@ class Nav extends Component {
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: state.auth.get("isAuthenticated"),
+        isOnline:        state.ui.get("isOnline"),
         profile:         state.profile,
     };
 };

@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { List } from "immutable";
 import FlipMove from "react-flip-move";
 
 // Instruments
@@ -14,12 +13,14 @@ import { Composer, Catcher, Post } from "../../components";
 
 // Actions
 import { postsActions } from "../../bus/posts/actions";
+import { usersActions } from "../../bus/users/actions";
 
 class Posts extends Component {
     componentDidMount () {
         const { actions } = this.props;
 
         actions.fetchPostsAsync();
+        actions.fetchUsersAsync();
     }
 
     render () {
@@ -68,7 +69,10 @@ const mapDispatchToProps = (dispatch) => {
         //     },
         //     dispatch
         // ),
-        actions: bindActionCreators({ ...postsActions }, dispatch),
+        actions: bindActionCreators(
+            { ...postsActions, ...usersActions },
+            dispatch
+        ),
     };
 };
 
