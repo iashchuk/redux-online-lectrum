@@ -14,9 +14,13 @@ import { Loading } from "../components";
 // Actions
 import { authActions } from "../bus/auth/actions";
 
+// WebSocket
+import { joinSocketChannel } from "../init/socket";
+
 class App extends Component {
     componentDidMount () {
         this.props.initializeAsync();
+        joinSocketChannel();
     }
 
     render () {
