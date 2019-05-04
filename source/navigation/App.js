@@ -33,13 +33,17 @@ class App extends Component {
     }
 
     render () {
-        const { isAuthenticated, isInitialized } = this.props;
+        const { isAuthenticated, isInitialized, listenPosts } = this.props;
 
         if (!isInitialized) {
             return <Loading />;
         }
 
-        return isAuthenticated ? <Private /> : <Public />;
+        return isAuthenticated ? (
+            <Private listenPosts = { listenPosts } />
+        ) : (
+            <Public />
+        );
     }
 }
 
