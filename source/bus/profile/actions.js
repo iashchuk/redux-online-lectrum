@@ -14,4 +14,12 @@ export const profileActions = {
             type: types.CLEAR_PROFILE,
         };
     },
+
+    // Async
+    updateNameAsync: (newName) => {
+        return {
+            type:    types.UPDATE_NAME_ASYNC,
+            payload: newName,
+        };
+    },
 };

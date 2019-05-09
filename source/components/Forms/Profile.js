@@ -19,7 +19,6 @@ import { profileActions } from "../../bus/profile/actions";
 class Profile extends Component {
     static defaultProps = {
         // Actions
-        updateNameAsync:   () => {},
         updateAvatarAsync: () => {},
     };
 
