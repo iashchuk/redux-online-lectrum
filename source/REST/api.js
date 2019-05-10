@@ -1,11 +1,9 @@
 // Instruments
 import { MAIN_URL, groupId } from "./config";
-
 export const api = {
     get token () {
         return localStorage.getItem("token");
     },
-
     auth: {
         signup (userInfo) {
             return fetch(`${MAIN_URL}/user/${groupId}`, {
@@ -78,15 +76,36 @@ export const api = {
                 },
             });
         },
-        users: {
-            fetch () {
-                return fetch(`${MAIN_URL}/user/all`, {
-                    method:  "GET",
-                    headers: {
-                        Authorization: this.token,
-                    },
-                });
-            },
+    },
+    users: {
+        fetch () {
+            return fetch(`${MAIN_URL}/user/all`, {
+                method:  "GET",
+                headers: {
+                    Authorization: this.token,
+                },
+            });
+        },
+    },
+    profile: {
+        updateProfile (profileInfo) {
+            return fetch(`${MAIN_URL}/user`, {
+                method:  "PUT",
+                headers: {
+                    Authorization:  this.token,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(profileInfo),
+            });
+        },
+        updateAvatar (avatarFormData) {
+            return fetch(`${MAIN_URL}/image`, {
+                method:  "POST",
+                headers: {
+                    Authorization: this.token,
+                },
+                body: avatarFormData,
+            });
         },
     },
 };
