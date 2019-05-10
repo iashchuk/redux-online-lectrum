@@ -26,7 +26,7 @@ export const signup = {
         firstName: "Vitalii",
         lastName:  "Iashchuk",
         email:     "221box@inbox.ru",
-        password:  "apple_pie",
+        password:  "apple_pie2",
         invite,
     },
     schema: object().shape({
